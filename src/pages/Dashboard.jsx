@@ -11,7 +11,8 @@ import StatsSection from '../components/StatsSection';
 import ChartSection from '../components/ChartSection';
 import MapSection from '../components/MapSection';
 
-   
+import ParticlesBackground from '../components/ParticlesBackground';
+
 
 
 const Dashboard = () => {
@@ -55,7 +56,16 @@ const Dashboard = () => {
 
   return (
     <div className={`dashboard ${darkMode ? 'dark' : 'light'}`}>
-      <div className="dashboard-bg"></div>
+      
+<ParticlesBackground
+  density={8000}
+  maxDistance={120}
+  lineColor="rgba(255, 255, 255, 0.2)"
+  particleColors={[
+    'rgba(100, 200, 255, 0.6)',
+    'rgba(255, 100, 200, 0.6)'
+  ]}
+/>
 
       <Sidebar
         sidebarOpen={sidebarOpen}
