@@ -10,7 +10,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email && password) {
-      localStorage.setItem('auth', 'true')
+      localStorage.setItem('', '')
       navigate('/dashboard')
     };
   };
