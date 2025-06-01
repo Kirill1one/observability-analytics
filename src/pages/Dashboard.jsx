@@ -1,19 +1,18 @@
+// /src/pages/Dashboard.jsx
+
 import { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Chart as ChartJS, registerables } from 'chart.js';
-ChartJS.register(...registerables);  
+ChartJS.register(...registerables);
 
-
-
-import Sidebar from '../components/Sidebar' ;
+import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import StatsSection from '../components/StatsSection';
 import ChartSection from '../components/ChartSection';
 import MapSection from '../components/MapSection';
-
 import ParticlesBackground from '../components/ParticlesBackground';
 
-
+import { stats, chartDataByPeriod } from '../mock/fakeDashboardData';
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -21,51 +20,40 @@ const Dashboard = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [period, setPeriod] = useState('7d');
+  const [chartData, setChartData] = useState(chartDataByPeriod['7d']);
 
-  
-  const stats = [
-    { title: 'Активность', value: '1,240', trend: '+12%' },
-    { title: 'Ошибки', value: '24', trend: '-3%' },
-    { title: 'Пользователи', value: '563', trend: '+8%' },
-    { title: 'Скорость', value: '1.2s', trend: '+0.5%' }
-  ];
-  
-  const chartData = {
-    labels: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн'],
-    datasets: [{
-      label: 'Ошибки',
-      data: [12, 19, 3, 5, 2, 3],
-      borderColor: '#ff6d00',
-      tension: 0.4
-    }]
-  };
-  
+  // Поддержка мобильной адаптации и симуляция загрузки
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-      if (window.innerWidth < 768) setSidebarOpen(false)
-    }
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    const timer = setTimeout(() => setLoading(false), 1000)
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth < 768) setSidebarOpen(false);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => {
-      window.removeEventListener('resize', checkMobile)
-      clearTimeout(timer)
+      window.removeEventListener('resize', checkMobile);
+      clearTimeout(timer);
     };
   }, []);
 
+  // Обновление данных при смене периода
+  useEffect(() => {
+    setChartData(chartDataByPeriod[period]);
+  }, [period]);
+
   return (
     <div className={`dashboard ${darkMode ? 'dark' : 'light'}`}>
-      
-<ParticlesBackground
-  density={8000}
-  maxDistance={120}
-  lineColor="rgba(255, 255, 255, 0.2)"
-  particleColors={[
-    'rgba(100, 200, 255, 0.6)',
-    'rgba(255, 100, 200, 0.6)'
-  ]}
-/>
+      <ParticlesBackground
+        density={8000}
+        maxDistance={120}
+        lineColor="rgba(255, 255, 255, 0.2)"
+        particleColors={[
+          'rgba(100, 200, 255, 0.6)',
+          'rgba(255, 100, 200, 0.6)',
+        ]}
+      />
 
       <Sidebar
         sidebarOpen={sidebarOpen}
@@ -88,7 +76,16 @@ const Dashboard = () => {
             <div className="loading-spinner"></div>
           ) : (
             <>
+              <div className="dashboard-controls">
+                <label>Период:</label>
+                <select value={period} onChange={(e) => setPeriod(e.target.value)}>
+                  <option value="7d">7 дней</option>
+                  <option value="30d">30 дней</option>
+                </select>
+              </div>
+
               <StatsSection stats={stats} />
+
               <section className="charts-section">
                 <ChartSection chartData={chartData} />
                 <MapSection darkMode={darkMode} />
@@ -98,7 +95,9 @@ const Dashboard = () => {
         </div>
       </main>
 
-      {isMobile && sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />}
+      {isMobile && sidebarOpen && (
+        <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)} />
+      )}
     </div>
   );
 };

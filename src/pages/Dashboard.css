@@ -32,6 +32,23 @@
   --card-bg: var(--card-bg-light);
 }
 
+.dashboard-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.dashboard-controls select {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 12px;
+  color: var(--text-primary);
+  border-radius: 6px;
+  outline: none;
+}
+
+
 /* Фон */
 .dashboard-bg {
   position: fixed;
@@ -125,6 +142,20 @@
   color: white;
 }
 
+.nav-item.active {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.nav-item.logout-btn {
+  color: #f44336;
+}
+
+.nav-item.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+
 .nav-icon {
   font-size: 20px;
   min-width: 24px;
@@ -178,6 +209,13 @@
 .menu-toggle:hover {
   background: rgba(255, 255, 255, 0.1);
 }
+
+.page-title {
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-right: auto;
+}
+
 
 .search-container {
   flex: 1;
@@ -425,4 +463,10 @@ th {
     width: 100%;
     max-width: 100%;
   }
+}
+
+
+.page {
+  
+  color: var(--text-primary);
 }
