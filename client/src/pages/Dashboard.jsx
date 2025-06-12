@@ -1,5 +1,4 @@
-// /src/pages/Dashboard.jsx
-
+ 
 import { useEffect, useState } from 'react';
 import './Dashboard.css';
 import { Chart as ChartJS, registerables } from 'chart.js';
