@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
-import Metrics from './pages/Metrics/Metrics'
+import Metrics from './pages/metrics/Metrics'
 import Profile from './pages/Profile/Profile'
 import Settings from './pages/Settings/Settings'
 import Geo from './pages/geo/Geo'
 import Verify from './pages/Verify'
 
 const isAuthenticated = () => {
-  return !!localStorage.getItem('auth');
+  return !!!localStorage.getItem('auth');
 };
 
 

@@ -8,12 +8,12 @@ const transporter = nodemailer.createTransport({
   }
 })
 
-export const sendVerificationEmail = async (email, token) => {
-  const link = `http://localhost:5173/verify?token=${token}`
-  await transporter.sendMail({
-    from: 'noreply@analytics.com',
-    to: email,
-    subject: 'Подтверждение регистрации',
-    html: `<p>Перейдите по ссылке для подтверждения: <a href="${link}">${link}</a></p>`
-  })
-}
+// export const sendVerificationEmail = async (email, token) => {
+//   const link = `http://localhost:5173/verify?token=${token}`
+//   await transporter.sendMail({
+//     from: 'noreply@analytics.com',
+//     to: email,
+//     subject: 'Подтверждение регистрации',
+//     html: `<p>Перейдите по ссылке для подтверждения: <a href="${link}">${link}</a></p>`
+//   })
+// }

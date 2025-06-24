@@ -5,3 +5,10 @@ CREATE TABLE IF NOT EXISTS users (
   verified BOOLEAN DEFAULT false,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS analytics (
+  id SERIAL PRIMARY KEY,
+  event TEXT NOT NULL,
+  data JSONB,
+  timestamp TIMESTAMP DEFAULT now()
+);

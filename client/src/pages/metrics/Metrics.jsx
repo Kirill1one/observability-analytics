@@ -7,6 +7,11 @@ import ParticlesBackground from '../../components/ParticlesBackground'
 
 import { chartDataByPeriod } from '../../mock/fakeDashboardData'
 
+import { sendAnalyticsEvent } from "../../api/analytics";
+
+sendAnalyticsEvent("page_view", { path: window.location.pathname });
+sendAnalyticsEvent("button_click", { id: "register" });
+
 const Metrics = () => {
   const [darkMode, setDarkMode] = useState(true)
   const [sidebarOpen, setSidebarOpen] = useState(true)
