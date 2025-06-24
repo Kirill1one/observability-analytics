@@ -9,32 +9,18 @@ export default function Register() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    setSuccess('');
 
-    try {
-      const res = await fetch('http://localhost:5000/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+    await fetch(`${import.meta.env.VITE_API_URL}/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await res.json();
-
-      if (res.ok) {
-        setSuccess('✅ Проверьте email для подтверждения');
-        setEmail('');
-        setPassword('');
-      } else {
-        setError(data.error || 'Ошибка регистрации');
-      }
-    } catch (err) {
-      setError('Сервер не отвечает');
-    }
+    navigate('/dashboard');
   };
+
 
   return (
     <div className="login-container">
@@ -45,7 +31,7 @@ export default function Register() {
           placeholder="Ваш Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
+
         />
         <div className="password-wrapper">
           <input
@@ -53,20 +39,20 @@ export default function Register() {
             placeholder="Пароль"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            required
+
           />
           <button type="button" onClick={() => setShowPassword(!showPassword)}>
             {showPassword ? '🙈' : '👁️'}
           </button>
         </div>
-        <button type="submit" disabled={!email || password.length < 6}>
+        <button type="submit" disabled={!!!email || password.length < 6}>
           Зарегистрироваться
         </button>
         <p className="switch-mode">
           Уже есть аккаунт? <span onClick={() => navigate('/login')}>Войти</span>
         </p>
-        {error && <div className="error">{error}</div>}
         {success && <div className="success">{success}</div>}
+        {error && <div className="error">{error}</div>}
       </form>
     </div>
   );

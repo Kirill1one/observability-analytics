@@ -1,22 +1,100 @@
-# Logs
-logs
-*.log
+# ----------------------------------------
+# Node.js
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+bun-debug.log*
 lerna-debug.log*
+turbo.log
 
-node_modules
-dist
-dist-ssr
-*.local
-.vite
-# Editor directories and files
-.idea
+# ----------------------------------------
+# Logs
+logs/
+*.log
+*.log.*
+vite-error.log
+.eslintcache
+
+# ----------------------------------------
+# Build output
+dist/
+dist-ssr/
+build/
+out/
+public/build/
+.vite/
+.cache/
+.next/
+.svelte-kit/
+.temp/
+.storybook/
+
+# ----------------------------------------
+# Environment files
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ----------------------------------------
+# Local settings & OS-specific
+.DS_Store
+Thumbs.db
+
+# ----------------------------------------
+# IDEs and editors
+.idea/
+.vscode/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-.DS_Store 
+
+# ----------------------------------------
+# Testing
+coverage/
+jest.config.js
+*.test.js
+*.spec.js
+*.test.ts
+*.spec.ts
+
+# ----------------------------------------
+# CMS / WordPress (если используете)
+wp-content/uploads/
+wp-content/cache/
+wp-config-local.php
+local-config.php
+
+# ----------------------------------------
+# Design files (если используете Figma экспорт)
+*.fig
+*.sketch
+*.xd
+*.psd
+
+# ----------------------------------------
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# ----------------------------------------
+# Miscellaneous
+*.tgz
+*.bak
+*.tmp
+*.temp
+*.log
+*.swp
+*.zip
+*.tar
+*.gz
+
+# Optional for macOS / Linux cache
+.cache/

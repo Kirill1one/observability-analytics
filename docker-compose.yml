@@ -4,15 +4,18 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - VITE_API_URL=http://localhost:5000
+      - VITE_API_URL=http://localhost:5000/api
+
     depends_on:
       - server
+    restart: always
 
   server:
     build: ./server
     ports:
       - "5000:5000"
     environment:
+    - CORS_ORIGIN=http://localhost:3000
       - PGHOST=postgres
       - PGUSER=postgres
       - PGPASSWORD=postgres
@@ -23,9 +26,10 @@ services:
       - MAIL_PASS=23456!
     depends_on:
       - postgres
+    restart: always
 
   postgres:
-    image: postgres:15
+    image: postgres
     restart: always
     environment:
       POSTGRES_USER: postgres
@@ -35,7 +39,7 @@ services:
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
 
 volumes:
   pgdata:
